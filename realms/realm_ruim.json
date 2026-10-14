@@ -1,0 +1,28 @@
+{
+  "realm": "banco-interno",
+  "enabled": true,
+  "sslRequired": "none",
+  "accessTokenLifespan": 86400,
+  "ssoSessionIdleTimeout": 604800,
+  "revokeRefreshToken": false,
+  "bruteForceProtected": false,
+  "passwordPolicy": "length(6)",
+  "defaultSignatureAlgorithm": "HS256",
+  "clients": [
+    {
+      "clientId": "portal-gerente",
+      "publicClient": false,
+      "secret": "Portal@2023!",
+      "redirectUris": ["*"],
+      "webOrigins": ["*"],
+      "implicitFlowEnabled": true,
+      "directAccessGrantsEnabled": true
+    },
+    {
+      "clientId": "app-mobile",
+      "publicClient": true,
+      "redirectUris": ["http://app.banco.exemplo/callback"],
+      "attributes": {}
+    }
+  ]
+}

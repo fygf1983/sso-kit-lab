@@ -1,0 +1,42 @@
+{
+  "realm": "banco-interno",
+  "enabled": true,
+  "sslRequired": "all",
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "revokeRefreshToken": true,
+  "refreshTokenMaxReuse": 0,
+  "bruteForceProtected": true,
+  "failureFactor": 5,
+  "passwordPolicy": "length(14) and notUsername and passwordHistory(5) and passwordBlacklist(common-passwords.txt)",
+  "defaultSignatureAlgorithm": "RS256",
+  "defaultRequiredActions": ["CONFIGURE_TOTP"],
+  "otpPolicyType": "totp",
+  "otpPolicyAlgorithm": "HmacSHA1",
+  "otpPolicyDigits": 6,
+  "otpPolicyPeriod": 30,
+  "clients": [
+    {
+      "clientId": "portal-gerente",
+      "publicClient": false,
+      "secret": "**********",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["https://portal.banco.exemplo/callback"],
+      "webOrigins": ["https://portal.banco.exemplo"],
+      "attributes": {"pkce.code.challenge.method": "S256"}
+    },
+    {
+      "clientId": "app-mobile",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["https://app.banco.exemplo/callback", "http://localhost:5003/callback"],
+      "webOrigins": [],
+      "attributes": {"pkce.code.challenge.method": "S256"}
+    }
+  ]
+}

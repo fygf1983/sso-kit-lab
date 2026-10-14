@@ -1,0 +1,14 @@
+# Keycloak "de verdade" para o laboratorio (NAO TESTADO no ambiente de preparo - sem acesso ao Docker Hub/Quay)
+# Teste antes da aula:  export KC_ADMIN_USER=admin KC_ADMIN_PASSWORD='Troque-Esta-Senha-1' && docker compose -f docker-compose.keycloak.yml up
+# Console: http://localhost:8080  |  confirme a tag da imagem em https://quay.io/repository/keycloak/keycloak
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_ADMIN_USER:?defina KC_ADMIN_USER}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD:?defina KC_ADMIN_PASSWORD}
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./realms:/opt/keycloak/data/import:ro
